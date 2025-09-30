@@ -1,1 +1,137 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/X2wXCC5u)
+# Project 1: Shell
+
+The purpose of this project is to design and develop a comprehensive shell interface that enhances process control, user interaction, and error handling mechanisms.
+
+## Group Members
+- **Kyle Boerger**: krb22p@fsu.edu
+- **Hoang Vu**: hmv23@fsu.edu
+- **Bao Le**: bgl23@fsu.edu
+## Division of Labor
+
+### Part 0: Tokenization
+- **Assigned to**: Hoang Vu, Kyle Boerger
+
+### Part 1: Prompt
+- **Assigned to**: Kyle Boerger, Bao Le
+
+### Part 2: Environment Variables
+- **Assigned to**: Hoang Vu, Bao Le
+
+### Part 3: Tilde Expansion
+- **Assigned to**: Kyle Boerger, Hoang Vu
+
+### Part 4: $PATH Search
+- **Assigned to**: Hoang Vu, Bao Le
+
+### Part 5: External Command Execution
+- **Assigned to**: Kyle Boerger, Bao Le
+
+### Part 6: I/O Redirection
+- **Assigned to**: Bao Le, Hoang Vu
+
+### Part 7: Piping
+- **Assigned to**: Bao Le, Kyle Boerger
+
+### Part 8: Background Processing
+- **Assigned to**: Bao Le, Hoang Vu
+
+### Part 9: Internal Command Execution
+- **Assigned to**: Hoang Vu, Kyle Boerger
+
+### Extra Credit
+- **Assigned to**: Kyle Boerger, Hoang Vu, Bao Le
+
+## File Listing
+```
+root/
+├── .vscode/
+├── src/
+    ├── background.rs
+    ├── environment.rs
+    ├── external.rs
+    ├── lexer.rs
+    ├── main.rs
+    ├── path_search.rs
+    ├── piping.rs
+    ├── prompt.rs
+    ├── redirection.rs
+    ├── tilde.rs
+├── .gitattributes
+├── .gitignore
+├── Cargo.lock
+├── Cargo.toml
+├── README.md
+
+```
+## How to Compile & Execute
+
+### Requirements
+- **Compiler**: `cargo` for Rust.
+- **Dependencies**:
+    nix = { version = "0.27", features = ["process", "fs"] }
+    signal-hook = "0.3"
+    regex = "1.10"
+
+
+### Compilation
+For a C/C++ example:
+```bash
+make
+```
+This will build the executable in ...
+### Execution
+```bash
+make run
+```
+This will run the program ...
+
+## Development Log
+Each member records their contributions here.
+
+### Kyle Boerger
+
+| Date       | Work Completed / Notes |
+|------------|------------------------|
+| 2025-09-18 | Tilde Expansion        |
+| 2025-09-23 | External Command Exec  |
+| 2025-09-27 | Background Processing  |
+
+### Hoang Vu
+
+| Date       | Work Completed / Notes |
+|------------|------------------------|
+| 2025-09-14 | Tokenization           |
+| 2025-09-21 | $PATH Search           |
+| YYYY-MM-DD | [Description of task]  |
+
+
+### Bao Le
+
+| Date       | Work Completed / Notes |
+|------------|------------------------|
+| 2025-09-15 | Prompt                 |
+| 2025-09-18 | Environment Variables  |
+| 2025-09-26 | I/O Redirection        |
+
+
+## Meetings
+Document in-person meetings, their purpose, and what was discussed.
+
+| Date       | Attendees            | Topics Discussed | Outcomes / Decisions |
+|------------|----------------------|------------------|-----------------------|
+| 2025-09-09 | All members          | First meeting    | Division of labor     |
+| YYYY-MM-DD | [Names]              | [Agenda items]   | [Actions/Next steps]  |
+
+
+## Bugs
+- **Bug 1**: This is bug 1.
+- **Bug 2**: This is bug 2.
+- **Bug 3**: This is bug 3.
+
+## Extra Credit
+- **Extra Credit 1**: [Extra Credit Option]
+- **Extra Credit 2**: [Extra Credit Option]
+- **Extra Credit 3**: [Extra Credit Option]
+
+## Considerations
+[Description]
