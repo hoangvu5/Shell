@@ -17,7 +17,9 @@ pub fn execute_builtin(
             Ok(true) // Signal to exit the shell
         }
         "cd" => {
-            execute_cd(args)?;
+            if let Err(e) = execute_cd(args) {
+                eprintln!("{}", e);
+            }
             Ok(false) // Continue shell execution
         }
         "jobs" => {

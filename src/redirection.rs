@@ -11,6 +11,45 @@ use std::process;
 // Import the manager and Job structure
 use crate::background::BackgroundManager;
 
+/// Parse I/O redirection tokens from a command
+/// Returns (cmd_tokens, input_file, output_file, parse_ok)
+pub fn parse_redirection(tokens: &Vec<String>) -> (Vec<String>, Option<String>, Option<String>, bool) {
+    let mut cmd_tokens = Vec::new();
+    let mut input_file: Option<String> = None;
+    let mut output_file: Option<String> = None;
+    let mut parse_ok = true;
+
+    let mut i = 0;
+    while i < tokens.len() {
+        match tokens[i].as_str() {
+            "<" => {
+                if i + 1 < tokens.len() {
+                    input_file = Some(tokens[i + 1].clone());
+                    i += 1;
+                } else {
+                    eprintln!("Error: no input file specified after '<'");
+                    parse_ok = false;
+                    break;
+                }
+            }
+            ">" => {
+                if i + 1 < tokens.len() {
+                    output_file = Some(tokens[i + 1].clone());
+                    i += 1;
+                } else {
+                    eprintln!("Error: no output file specified after '>'");
+                    parse_ok = false;
+                    break;
+                }
+            }
+            _ => cmd_tokens.push(tokens[i].clone()),
+        }
+        i += 1;
+    }
+
+    (cmd_tokens, input_file, output_file, parse_ok)
+}
+
 /// Helper function to execute execv. It should return ! (never) on success.
 fn execute_execv(path: &CString, args: &[&CStr]) -> ! {
     match execv(path, args) {
@@ -113,5 +152,4 @@ pub fn execute_command(
             format!("Fork failed: {}", e),
         )),
     }
-
 }

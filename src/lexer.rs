@@ -15,10 +15,6 @@ impl TokenList {
     pub fn add_token(&mut self, item: &str) {
         self.items.push(item.to_string());
     }
-
-    pub fn size(&self) -> usize {
-        self.items.len()
-    }
 }
 
 /// Prints prompt, reads input, trims newline/CRLF, returns input

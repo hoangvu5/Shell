@@ -1,7 +1,6 @@
 extern crate nix;
 
 mod environment;
-mod external;
 mod lexer;
 mod path_search;
 mod prompt;
@@ -16,7 +15,7 @@ use lexer::{get_input, get_tokens, TokenList};
 use path_search::search_path;
 use std::io;
 use tilde::expand_tilde;
-use external::execute_command;
+use redirection::{execute_command, parse_redirection};
 use piping::execute_pipeline;
 use background::BackgroundManager;
 use builtin::execute_builtin;
@@ -102,15 +101,21 @@ fn main() -> io::Result<()> {
                     }
 
                     // Search PATH for each command in the pipeline
+                    let mut all_found = true;
                     for cmd in &mut pipeline {
                         if !cmd.items.is_empty() && !cmd.items[0].contains('/') {
                             if let Some(full_path) = search_path(&cmd.items[0]) {
                                 cmd.items[0] = full_path;
                             } else {
                                 eprintln!("{}: command not found", cmd.items[0]);
-                                continue;
+                                all_found = false;
+                                break;
                             }
                         }
+                    }
+
+                    if !all_found {
+                        continue;
                     }
 
                     if let Err(err) = execute_pipeline(&pipeline, background, &mut bg_manager) {
@@ -126,38 +131,7 @@ fn main() -> io::Result<()> {
                 // I/O redirection for single command
 
                 let tokens = &pipeline[0];
-                let mut cmd_tokens = Vec::new();
-                let mut input_file: Option<&str> = None;
-                let mut output_file: Option<&str> = None;
-                let mut parse_ok = true;
-
-                let mut i = 0;
-                while i < tokens.items.len() {
-                    match tokens.items[i].as_str() {
-                        "<" => {
-                            if i + 1 < tokens.items.len() {
-                                input_file = Some(&tokens.items[i + 1]);
-                                i += 1;
-                            } else {
-                                eprintln!("Error: no input file specified after '<'");
-                                parse_ok = false;
-                                break;
-                            }
-                        }
-                        ">" => {
-                            if i + 1 < tokens.items.len() {
-                                output_file = Some(&tokens.items[i + 1]);
-                                i += 1;
-                            } else {
-                                eprintln!("Error: no output file specified after '>'");
-                                parse_ok = false;
-                                break;
-                            }
-                        }
-                        _ => cmd_tokens.push(tokens.items[i].clone()),
-                    }
-                    i += 1;
-                }
+                let (mut cmd_tokens, input_file, output_file, parse_ok) = parse_redirection(&tokens.items);
 
                 if !parse_ok || cmd_tokens.is_empty() {
                     if cmd_tokens.is_empty() && parse_ok {
@@ -179,7 +153,7 @@ fn main() -> io::Result<()> {
 
 
                 // Execute (foreground or background)
-                if let Err(err) = execute_command(&cmd_tokens, input_file, output_file, background, &mut bg_manager) {
+                if let Err(err) = execute_command(&cmd_tokens, input_file.as_deref(), output_file.as_deref(), background, &mut bg_manager) {
                     eprintln!("{}", err);
                 } else {
                     // Add to history only for successful external commands
