@@ -102,7 +102,8 @@ Each member records their contributions here.
 |------------|------------------------|
 | 2025-09-14 | Tokenization           |
 | 2025-09-21 | $PATH Search           |
-| YYYY-MM-DD | [Description of task]  |
+| 2025-09-28 | Internal Command Exec  |
+
 
 
 ### Bao Le
@@ -112,6 +113,7 @@ Each member records their contributions here.
 | 2025-09-15 | Prompt                 |
 | 2025-09-18 | Environment Variables  |
 | 2025-09-26 | I/O Redirection        |
+| 2025-09-28 | Piping                 |
 
 
 ## Meetings
@@ -120,18 +122,17 @@ Document in-person meetings, their purpose, and what was discussed.
 | Date       | Attendees            | Topics Discussed | Outcomes / Decisions |
 |------------|----------------------|------------------|-----------------------|
 | 2025-09-09 | All members          | First meeting    | Division of labor     |
-| YYYY-MM-DD | [Names]              | [Agenda items]   | [Actions/Next steps]  |
+
+
+Most team communitcation is done using Discord, there are no conflict and every process is finish smoothly
 
 
 ## Bugs
-- **Bug 1**: This is bug 1.
-- **Bug 2**: This is bug 2.
-- **Bug 3**: This is bug 3.
+- **Bug 1**: Performing cd with a non existence directory will prompt this following warning "cd: command not found"
+
 
 ## Extra Credit
-- **Extra Credit 1**: [Extra Credit Option]
-- **Extra Credit 2**: [Extra Credit Option]
-- **Extra Credit 3**: [Extra Credit Option]
+
 
 ## Considerations
 [Description]
