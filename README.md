@@ -67,7 +67,7 @@ root/
 ## How to Compile & Execute
 
 ### Requirements
-- **Compiler**: `cargo` for Rust.
+- **Compiler**: `rustc` for Rust.
 - **Dependencies**:
     nix = { version = "0.27", features = ["process", "fs"] }
     signal-hook = "0.3"
@@ -75,15 +75,9 @@ root/
 
 
 ### Compilation
-For a C/C++ example:
-```bash
-make
-```
-This will build the executable in ...
+- cargo build
 ### Execution
-```bash
-make run
-```
+- cargo run
 This will run the program ...
 
 ## Development Log
@@ -136,4 +130,3 @@ Most team communitcation is done using Discord, there are no conflict and every 
 
 
 ## Considerations
-[Description]
