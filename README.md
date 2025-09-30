@@ -56,6 +56,7 @@ root/
     ├── prompt.rs
     ├── redirection.rs
     ├── tilde.rs
+    ├── builtin.rs
 ├── .gitattributes
 ├── .gitignore
 ├── Cargo.lock
